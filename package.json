@@ -1,14 +1,27 @@
 {
-  "name": "typeorm-snake-naming-strategy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@rafikidota/typeorm-snake-naming-strategy",
+  "version": "0.0.1",
+  "description": "Sometimes, the best way to solve your own problems is to help someone else.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafikidota/typeorm-snake-naming-strategy.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "rafiki <71207415+rafikidota@users.noreply.github.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepare": "husky",
+    "prebuild": "rimraf -rf dist",
+    "build": "tsc -p tsconfig.json",
+    "lint": "npx eslint --debug . --fix",
+    "format": "prettier --write \"**/*.ts\"",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
   "dependencies": {
     "typeorm": "0.3.20"
   },
