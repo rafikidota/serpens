@@ -1,0 +1,1 @@
+# typeorm-snake-naming-strategy
