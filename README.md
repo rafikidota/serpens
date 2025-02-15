@@ -1,4 +1,4 @@
-# Serpens
+# TypeORM Snake Naming Strategy
 
 Sometimes, the best way to solve your own problems is to help someone else.
 
