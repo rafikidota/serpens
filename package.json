@@ -1,10 +1,10 @@
 {
-  "name": "@rafikidota/typeorm-snake-naming-strategy",
+  "name": "@rafikidota/serpens",
   "version": "1.0.0",
   "description": "Sometimes, the best way to solve your own problems is to help someone else.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafikidota/typeorm-snake-naming-strategy.git"
+    "url": "git+https://github.com/rafikidota/serpens.git"
   },
   "author": "rafiki <71207415+rafikidota@users.noreply.github.com>",
   "license": "MIT",

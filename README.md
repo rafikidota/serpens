@@ -1,4 +1,4 @@
-# TypeORM Snake Naming Strategy
+# Serpens
 
 Sometimes, the best way to solve your own problems is to help someone else.
 
@@ -10,7 +10,7 @@ The following TypeScript code snippet illustrates an example of using this libra
 ```ts
 import { DataSource } from 'typeorm';
 import { DataSourceOptions } from 'typeorm';
-import { SnakeNamingStrategy } from '@rafikidota/typeorm-snake-naming-strategy';
+import { SnakeNamingStrategy } from '@rafikidota/serpens';
 
 const config: DataSourceOptions = {
     type: 'postgres',
