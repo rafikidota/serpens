@@ -1,6 +1,6 @@
 {
   "name": "@rafikidota/typeorm-snake-naming-strategy",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Sometimes, the best way to solve your own problems is to help someone else.",
   "repository": {
     "type": "git",
