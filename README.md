@@ -36,5 +36,3 @@ Before using this library, ensure you have the following:
 
 ## Additional Resources
 - [TypeORM Documentation](https://typeorm.io/)
-- [NestJS Documentation](https://docs.nestjs.com/)
-- [Nestjs Iroh example on GitHub](https://github.com/rafikidota/nestjs-iroh/)
