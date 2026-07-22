@@ -34,5 +34,19 @@ Before using this library, ensure you have the following:
 - Necessary dependencies installed
 
 
+## Development
+
+This package uses pnpm, Vitest and tsdown.
+
+```bash
+pnpm install
+pnpm typecheck  # tsc --noEmit
+pnpm test       # run the test suite
+pnpm lint       # lint and auto-fix
+pnpm build      # build dual ESM/CJS output to dist/
+```
+
+CI (GitHub Actions) runs typecheck, lint, test and build on every push/PR. Published output ships both CommonJS and ESM builds via `exports` in `package.json`.
+
 ## Additional Resources
 - [TypeORM Documentation](https://typeorm.io/)
