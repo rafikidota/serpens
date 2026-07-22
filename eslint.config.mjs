@@ -27,7 +27,9 @@ export default tseslint.config(
       ecmaVersion: 5,
       sourceType: 'module',
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ['vitest.config.ts', 'test/*.ts'],
+        },
         tsconfigRootDir: import.meta.dirname
       }
     }
