@@ -34,3 +34,6 @@ test/
 
 docs/
 .github/
+
+CLAUDE.md
+.claude/
