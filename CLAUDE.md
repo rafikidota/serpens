@@ -8,11 +8,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- `npm run build` — compile `src/` to `dist/` via `tsc -p tsconfig.json` (runs `rimraf dist` first via `prebuild`)
+- `npm run build` — bundle `src/` to `dist/` via `tsdown` (see `tsdown.config.ts`): dual CJS/ESM output (`dist/index.cjs`, `dist/index.mjs`) plus `.d.cts`/`.d.mts` declarations, with sourcemaps. No `prebuild` step; `tsdown`'s `clean: true` handles clearing `dist/` itself.
+- `npm run typecheck` — `tsc --noEmit`
 - `npm run lint` — `eslint --debug . --fix`
+- `npm run lint:check` — `eslint .` (no `--fix`, no `--debug`); this is the CI/publish-safe variant, since `--fix` would auto-mutate the checkout.
 - `npm run format` — `prettier --write "**/*.ts"`
+- `npm test` — runs the Vitest suite (`vitest run`); `npm run test:watch` for watch mode.
 - Package manager is pnpm (`pnpm-lock.yaml`), despite npm-named scripts.
-- No test suite exists in this repo currently.
+- 18 Vitest tests live in `test/`: `camel-case.test.ts`, `snake-case.test.ts`, `title-case.test.ts`, `snake.test.ts`.
 
 Pre-commit runs `lint-staged` via husky (`.husky/pre-commit`): staged `*.ts` files get `prettier --write` then `eslint`.
 
@@ -25,10 +28,10 @@ Two independent export groups from `src/index.ts`:
 
 Each subdirectory re-exports through its own `index.ts`; `src/index.ts` re-exports both barrels. When adding a new case-conversion util or naming strategy, follow this barrel pattern (add the file, then export it from the subdirectory's `index.ts`).
 
-TypeORM is a `devDependency`, not a runtime `dependency` — consumers must supply their own TypeORM install (peer-dependency style, though not formally declared as one).
+TypeORM is declared as a `peerDependency` (`"typeorm": "^0.3.0"`), not a runtime `dependency` — consumers must supply their own TypeORM install; it's also present as a `devDependency` for local development/tests.
 
 ## TypeScript config notes
 
 - Target `ES2021`, `CommonJS` modules, decorators enabled (`experimentalDecorators`, `emitDecoratorMetadata`) for TypeORM compatibility.
 - `strict: true` but `strictNullChecks: false` — be aware null/undefined checks aren't enforced despite `strict` mode.
-- `tsconfig.build.json` extends the base config, excluding `dist`.
+- Only `tsconfig.json` exists (no separate build config) — it's used both for `typecheck` and by `tsdown` for the build.
