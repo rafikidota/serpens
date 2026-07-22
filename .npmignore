@@ -26,3 +26,11 @@ prettier.config
 
 yarn.lock
 yarn-error.log
+
+vitest.config.ts
+tsdown.config.ts
+test/
+*.test.ts
+
+docs/
+.github/
