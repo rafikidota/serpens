@@ -8,10 +8,6 @@
   },
   "author": "rafiki <71207415+rafikidota@users.noreply.github.com>",
   "license": "MIT",
-  "engines": {
-    "node": ">=20"
-  },
-  "packageManager": "pnpm@11.15.1",
   "peerDependencies": {
     "typeorm": "^0.3.0"
   },
