@@ -1,39 +1,35 @@
-.husky/
-.idea/
+# dependencies / vcs
 node_modules/
-src/
-
-assets/
-
 .git/
 .gitignore
 
+# source (only dist/ ships)
+src/
+assets/
+
+# tooling configs (dev-only)
 .nvmrc
-
 .huskyrc
-
+.husky/
 tsconfig.json
-tsconfig.build.json
-
-.eslintrc.json
-eslint.config.js
+vitest.config.ts
+tsdown.config.ts
 eslint.config.mjs
 .lintstagedrc.json
 .prettierignore
-prettier.config
-.prettierrc.json
-.prettierrc
+prettier.config.mjs
 
+# tests
+**/*.test.ts
+
+# alternate package managers
 yarn.lock
 yarn-error.log
 
-vitest.config.ts
-tsdown.config.ts
-test/
-*.test.ts
-
+# docs / CI / AI tooling
 docs/
 .github/
-
 CLAUDE.md
 .claude/
+.idea/
+.vscode/
