@@ -8,6 +8,7 @@
   },
   "author": "rafiki <71207415+rafikidota@users.noreply.github.com>",
   "license": "MIT",
+  "type": "module",
   "peerDependencies": {
     "typeorm": "^0.3.0"
   },
