@@ -1,5 +1,7 @@
 import eslint from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import oneLineImport from 'eslint-plugin-one-line-import'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
@@ -18,7 +20,22 @@ export default tseslint.config(
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
+  {
+    settings: {
+      'import/resolver': {
+        typescript: true,
+      },
+    },
+  },
   eslintPluginPrettierRecommended,
+  {
+    plugins: { 'one-line-import': oneLineImport },
+    rules: {
+      'one-line-import/one-line-import': 'error',
+    },
+  },
   {
     languageOptions: {
       globals: {
