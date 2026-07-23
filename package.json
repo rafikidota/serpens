@@ -9,9 +9,6 @@
   "author": "rafiki <71207415+rafikidota@users.noreply.github.com>",
   "license": "MIT",
   "type": "module",
-  "peerDependencies": {
-    "typeorm": "^0.3.0"
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -63,11 +60,8 @@
     "typescript-eslint": "8.43.0",
     "vitest": "4.1.10"
   },
-  "lint-staged": {
-    "**/*.{ts,json}": [
-      "prettier --write",
-      "eslint"
-    ]
+  "peerDependencies": {
+    "typeorm": "^0.3.0"
   },
   "keywords": [
     "typeorm",
@@ -75,5 +69,11 @@
     "database",
     "backend",
     "api"
-  ]
+  ],
+  "lint-staged": {
+    "**/*.{ts,json}": [
+      "prettier --write",
+      "eslint"
+    ]
+  }
 }
