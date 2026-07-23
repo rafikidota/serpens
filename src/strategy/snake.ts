@@ -1,5 +1,4 @@
-import { DefaultNamingStrategy } from 'typeorm';
-import { NamingStrategyInterface } from 'typeorm';
+import { DefaultNamingStrategy, NamingStrategyInterface } from 'typeorm';
 import { snakeCase } from '../util/snake-case';
 
 export class SnakeNamingStrategy
