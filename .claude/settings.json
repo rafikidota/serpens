@@ -4,9 +4,15 @@
       "Bash(pnpm install *)",
       "Bash(pnpm test *)",
       "Bash(pnpm typecheck *)",
-      "Bash(pnpm build *)",
       "Bash(pnpm lint *)",
-      "Bash(pnpm run *)",
+      "Bash(pnpm lint:check *)",
+      "Bash(pnpm format *)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm run typecheck *)",
+      "Bash(pnpm run lint *)",
+      "Bash(pnpm run lint:check *)",
+      "Bash(pnpm run format *)",
+      "Bash(pnpm run build *)",
       "Bash(rm -rf dist)"
     ]
   }
