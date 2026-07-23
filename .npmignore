@@ -23,8 +23,17 @@ prettier.config.mjs
 **/*.test.ts
 
 # alternate package managers
+package-lock.json
+npm-shrinkwrap.json
 yarn.lock
 yarn-error.log
+pnpm-lock.yaml
+pnpm-workspace.yaml
+bun.lock
+bun.lockb
+.yarnrc.yml
+.pnp.cjs
+.pnp.loader.mjs
 
 # docs / CI / AI tooling
 docs/
