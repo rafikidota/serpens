@@ -19,6 +19,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Pre-commit runs `lint-staged` via husky (`.husky/pre-commit`): staged `*.ts` files get `prettier --write` then `eslint`.
 
+Two GitHub Actions workflows: `ci.yml` (typecheck/lint:check/test/build on push/PR to `main`) and `publish.yml` (typecheck/lint:check/test/build/`npm publish` on `v*` tag push).
+
 ## Architecture
 
 Two independent export groups from `src/index.ts`:

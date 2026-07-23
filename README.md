@@ -2,14 +2,22 @@
 
 Sometimes, the best way to solve your own problems is to help someone else.
 
-## Using Snake Naming Strategy with TypeORM
+`@rafikidota/serpens` ships a TypeORM `SnakeNamingStrategy` plus three standalone string-case utilities (`camelCase`, `snakeCase`, `titleCase`) you can use independently of TypeORM.
 
-The following TypeScript code snippet illustrates an example of using this library with TypeORM.
+## Installation
 
+```bash
+npm install @rafikidota/serpens typeorm
+# or
+pnpm add @rafikidota/serpens typeorm
+```
+
+`typeorm` is a peer dependency — bring your own install (`^0.3.0`).
+
+## Using SnakeNamingStrategy with TypeORM
 
 ```ts
-import { DataSource } from 'typeorm';
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from '@rafikidota/serpens';
 
 const config: DataSourceOptions = {
@@ -28,11 +36,39 @@ const config: DataSourceOptions = {
 export default new DataSource(config);
 ```
 
+With this strategy applied, an entity like:
+
+```ts
+@Entity()
+class UserProfile {
+  @Column()
+  firstName: string;
+}
+```
+
+maps to table `user_profile`, column `first_name`.
+
+## String-case utilities
+
+The same conversion helpers used internally by `SnakeNamingStrategy` are exported for standalone use — no TypeORM required.
+
+```ts
+import { camelCase, snakeCase, titleCase } from '@rafikidota/serpens';
+
+snakeCase('firstName');           // 'first_name'
+snakeCase('UserHTTPServer');       // 'user_http_server'
+
+camelCase('first_name');          // 'firstName'
+camelCase('first_name', true);    // 'FirstName'
+
+titleCase('first name');          // 'First Name'
+```
+
 ## Prerequisites
+
 Before using this library, ensure you have the following:
 - TypeORM configured
 - Necessary dependencies installed
-
 
 ## Development
 
@@ -46,7 +82,7 @@ pnpm lint       # lint and auto-fix
 pnpm build      # build dual ESM/CJS output to dist/
 ```
 
-CI (GitHub Actions) runs typecheck, lint, test and build on every push/PR. Published output ships both CommonJS and ESM builds via `exports` in `package.json`.
+CI (GitHub Actions) runs typecheck, lint, test and build on every push/PR. A separate workflow publishes to npm on `v*` tags. Published output ships both CommonJS and ESM builds via `exports` in `package.json`.
 
 ## Additional Resources
 - [TypeORM Documentation](https://typeorm.io/)
