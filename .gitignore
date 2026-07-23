@@ -1,12 +1,15 @@
-# depedencies
+# dependencies
 node_modules/
 
-# build
+# build output
 dist/
 
-# package manager
-yarn.lock
-yarn-error.log
+# test coverage
+coverage/
 
-# ide
-.idea
+# editor / OS
+.idea/
+.DS_Store
+
+# local-only Claude Code overrides (settings.json itself IS tracked)
+.claude/settings.local.json
