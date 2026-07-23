@@ -1,6 +1,22 @@
 # dependencies
 node_modules/
 
+# npm
+npm-debug.log*
+.npm
+
+# yarn
+yarn-debug.log*
+yarn-error.log*
+.yarn/cache
+.yarn/unplugged
+.yarn/install-state.gz
+.pnp.*
+
+# pnpm
+pnpm-debug.log*
+.pnpm-store/
+
 # build output
 dist/
 
