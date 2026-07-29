@@ -97,7 +97,26 @@ A husky pre-commit hook runs `lint-staged` over staged `.ts`/`.json` files (pret
 
 ## Releasing
 
-CI (GitHub Actions) runs typecheck, lint, test and build on pushes to `main`/`development` and on every pull request. Pushing a `v*` tag triggers the publish workflow, which reruns the full CI job and then publishes to npm with provenance via OIDC trusted publishing — no npm token secret involved. Only `dist/` is included in the published tarball.
+CI (GitHub Actions) runs typecheck, lint, test and build on pushes to `main`/`development` and on every pull request.
+
+To cut a release:
+
+```bash
+pnpm version patch         # or minor / major — updates package.json, commits, tags
+git push --follow-tags     # pushing the v* tag triggers the publish workflow
+```
+
+Pushing a `v*` tag runs three jobs:
+
+| Job | Does |
+| --- | --- |
+| `ci` | Reruns the full CI workflow as a reusable workflow |
+| `guard` | Fails if the tag doesn't match `package.json`, then resolves the npm dist-tag — prereleases go to `next`, stable versions to `latest` |
+| `publish` | Waits for maintainer approval, then publishes |
+
+The publish job runs in the `release` environment, so it pauses for manual approval with the CI and guard results already visible. It publishes with provenance via OIDC trusted publishing — no npm token secret involved — and only `dist/` is included in the tarball.
+
+Use `pnpm version` rather than editing `package.json` by hand: it keeps the tag and the version in sync, which is what `guard` checks. The dist-tag matters because a trusted-publishing token cannot change dist-tags after the fact, so a mistagged prerelease would stay on `latest` permanently.
 
 ## Additional Resources
 
