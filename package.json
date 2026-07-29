@@ -9,6 +9,7 @@
   "author": "rafiki <71207415+rafikidota@users.noreply.github.com>",
   "license": "MIT",
   "type": "module",
+  "packageManager": "pnpm@11.17.0",
   "publishConfig": {
     "access": "public"
   },
