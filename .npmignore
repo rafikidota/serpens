@@ -9,7 +9,6 @@ assets/
 
 # tooling configs (dev-only)
 .nvmrc
-.huskyrc
 .husky/
 tsconfig.json
 vitest.config.ts
