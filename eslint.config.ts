@@ -1,22 +1,22 @@
-import eslint from '@eslint/js'
-import importPlugin from 'eslint-plugin-import'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
-import oneLineImport from 'eslint-plugin-one-line-import'
-import globals from 'globals'
-import tseslint from 'typescript-eslint'
+import eslint from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import oneLineImport from 'eslint-plugin-one-line-import';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
     ignores: [
-      'eslint.config.mjs',
+      'eslint.config.ts',
       'node_modules/',
       'dist/',
       '.idea/',
       '.vscode/',
       'src/schematics/crud/files/ts/**/*.ts',
       'src/schematics/init/files/ts/**/*.ts',
-      'src/schematics/use-case/files/ts/**/*.ts'
-    ]
+      'src/schematics/use-case/files/ts/**/*.ts',
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
@@ -48,13 +48,13 @@ export default tseslint.config(
           allowDefaultProject: [
             'vitest.config.ts',
             'tsdown.config.ts',
-            'prettier.config.mjs',
+            'prettier.config.ts',
             'test/*.ts',
           ],
         },
-        tsconfigRootDir: import.meta.dirname
-      }
-    }
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
   },
   {
     rules: {
@@ -71,6 +71,6 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/unbound-method': 'off',
-    }
-  }
-)
+    },
+  },
+);

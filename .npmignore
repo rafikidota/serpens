@@ -14,7 +14,7 @@ assets/
 tsconfig.json
 vitest.config.ts
 tsdown.config.ts
-eslint.config.mjs
+eslint.config.ts
 .lintstagedrc.json
 .prettierignore
 prettier.config.mjs
