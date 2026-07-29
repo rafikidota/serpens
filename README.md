@@ -12,7 +12,12 @@ npm install @rafikidota/serpens typeorm
 pnpm add @rafikidota/serpens typeorm
 ```
 
-`typeorm` is a peer dependency — bring your own install (`^0.3.0`).
+Requirements:
+
+- `typeorm` `^1.1.0` — peer dependency, bring your own install.
+- Node.js 24+ (the version used in CI, see `.nvmrc`).
+
+The package is published as ESM-first with a dual build: `import` resolves to `dist/index.mjs`, `require` to `dist/index.cjs`, each with its own type declarations.
 
 ## Using SnakeNamingStrategy with TypeORM
 
@@ -48,6 +53,16 @@ class UserProfile {
 
 maps to table `user_profile`, column `first_name`.
 
+The strategy overrides three members of TypeORM's `DefaultNamingStrategy`:
+
+| Member | Behaviour |
+| --- | --- |
+| `tableName` | Explicit `customName` wins, otherwise `snakeCase(className)` |
+| `columnName` | Joins embedded prefixes with the column name, then snake-cases the result |
+| `relationName` | `snakeCase(propertyName)` |
+
+Everything else falls back to `DefaultNamingStrategy` (index names, foreign keys, join tables, etc.).
+
 ## String-case utilities
 
 The same conversion helpers used internally by `SnakeNamingStrategy` are exported for standalone use — no TypeORM required.
@@ -64,25 +79,26 @@ camelCase('first_name', true);    // 'FirstName'
 titleCase('first name');          // 'First Name'
 ```
 
-## Prerequisites
-
-Before using this library, ensure you have the following:
-- TypeORM configured
-- Necessary dependencies installed
-
 ## Development
 
-This package uses pnpm, Vitest and tsdown.
+This package uses pnpm (version pinned via `packageManager` in `package.json`), Vitest and tsdown.
 
 ```bash
 pnpm install
-pnpm typecheck  # tsc --noEmit
-pnpm test       # run the test suite
-pnpm lint       # lint and auto-fix
-pnpm build      # build dual ESM/CJS output to dist/
+pnpm typecheck   # tsc --noEmit
+pnpm test        # run the test suite (pnpm test:watch for watch mode)
+pnpm lint        # lint and auto-fix
+pnpm lint:check  # lint without fixing (CI variant)
+pnpm format      # prettier --write
+pnpm build       # build dual ESM/CJS output to dist/
 ```
 
-CI (GitHub Actions) runs typecheck, lint, test and build on every push/PR. A separate workflow publishes to npm on `v*` tags. Published output ships both CommonJS and ESM builds via `exports` in `package.json`.
+A husky pre-commit hook runs `lint-staged` over staged `.ts`/`.json` files (prettier, then eslint).
+
+## Releasing
+
+CI (GitHub Actions) runs typecheck, lint, test and build on pushes to `main`/`development` and on every pull request. Pushing a `v*` tag triggers the publish workflow, which reruns the full CI job and then publishes to npm with provenance via OIDC trusted publishing — no npm token secret involved. Only `dist/` is included in the published tarball.
 
 ## Additional Resources
+
 - [TypeORM Documentation](https://typeorm.io/)
