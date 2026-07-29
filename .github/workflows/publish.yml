@@ -17,8 +17,43 @@ jobs:
       contents: read
     uses: ./.github/workflows/ci.yml
 
+  guard:
+    if: github.repository == 'rafikidota/serpens'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      dist_tag: ${{ steps.resolve.outputs.dist_tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate tag and resolve dist-tag
+        id: resolve
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          VERSION="${TAG_NAME#v}"
+          PKG="$(node -p "require('./package.json').version")"
+
+          if [ "$VERSION" != "$PKG" ]; then
+            echo "::error::Tag v$VERSION does not match package.json ($PKG). Use 'pnpm version' to keep them in sync."
+            exit 1
+          fi
+
+          if [[ "$VERSION" == *-* ]]; then
+            DIST_TAG=next
+          else
+            DIST_TAG=latest
+          fi
+
+          echo "dist_tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+          echo "Version $VERSION → dist-tag $DIST_TAG" >> "$GITHUB_STEP_SUMMARY"
+
   publish:
-    needs: ci
+    needs: [ci, guard]
     if: github.repository == 'rafikidota/serpens'
     runs-on: ubuntu-latest
     permissions:
@@ -41,4 +76,6 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Publish to npm
-        run: pnpm publish --no-git-checks
+        env:
+          DIST_TAG: ${{ needs.guard.outputs.dist_tag }}
+        run: pnpm publish --no-git-checks --provenance --tag "$DIST_TAG"
