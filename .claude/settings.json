@@ -2,18 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(pnpm install *)",
-      "Bash(pnpm test *)",
+      "Bash(pnpm run *)",
+      "Bash(pnpm build *)",
       "Bash(pnpm typecheck *)",
       "Bash(pnpm lint *)",
       "Bash(pnpm lint:check *)",
       "Bash(pnpm format *)",
-      "Bash(pnpm build *)",
-      "Bash(pnpm run typecheck *)",
-      "Bash(pnpm run lint *)",
-      "Bash(pnpm run lint:check *)",
-      "Bash(pnpm run format *)",
-      "Bash(pnpm run build *)",
-      "Bash(rm -rf dist)"
+      "Bash(pnpm test *)"
     ]
   }
 }
