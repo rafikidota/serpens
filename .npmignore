@@ -17,7 +17,7 @@ tsdown.config.ts
 eslint.config.ts
 .lintstagedrc.json
 .prettierignore
-prettier.config.mjs
+prettier.config.ts
 
 # tests
 **/*.test.ts
