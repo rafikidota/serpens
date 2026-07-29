@@ -1,11 +1,12 @@
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import oneLineImport from 'eslint-plugin-one-line-import';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: [
       'eslint.config.ts',
