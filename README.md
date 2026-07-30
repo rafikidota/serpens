@@ -95,9 +95,13 @@ pnpm build       # build dual ESM/CJS output to dist/
 
 A husky pre-commit hook runs `lint-staged` over staged `.ts`/`.json` files (prettier, then eslint).
 
+## Branching
+
+`main` is the only long-lived branch. Work on a short-lived branch (`feat/…`, `fix/…`), open a pull request against `main`, and merge once CI is green. Releases are cut from `main` by pushing a `v*` tag.
+
 ## Releasing
 
-CI (GitHub Actions) runs typecheck, lint, test and build on pushes to `main`/`development` and on every pull request.
+CI (GitHub Actions) runs typecheck, lint, test and build on every pull request and on pushes to any branch other than `main`. `main` itself is not in the push trigger: its commits already ran CI on their pull request, and a release would otherwise run CI twice — once for the version commit, once through the publish workflow.
 
 To cut a release:
 

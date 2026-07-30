@@ -20,9 +20,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Pre-commit runs `lint-staged` via husky (`.husky/pre-commit`, which sources nvm first): staged `**/*.{ts,json}` files get `prettier --write` then `eslint`.
 
+Branching is GitHub Flow: `main` is the only long-lived branch; work happens on short-lived `feat/*` / `fix/*` branches that merge into `main` via pull request, and releases are cut by pushing a `v*` tag on `main`.
+
 Two GitHub Actions workflows:
 
-- `ci.yml` — typecheck/lint:check/test/build. Triggers on push to `main` or `development`, on any pull request, and via `workflow_call`.
+- `ci.yml` — typecheck/lint:check/test/build. Triggers on push to any branch except `main`, on any pull request, and via `workflow_call`. `main` is deliberately excluded from the push trigger: every commit reaching `main` already ran CI on its pull request, and a release pushes the version commit and the `v*` tag together, so a push trigger on `main` would run CI twice per release (once for the branch push, once through `publish.yml`'s `workflow_call`). The `concurrency` group keys on `github.head_ref || github.ref` so a pull request run and the branch push run of the same commit share a group and the pull request run cancels the redundant push run.
 - `publish.yml` — on `v*` tag push: calls `ci.yml` as a reusable workflow, then `pnpm publish --no-git-checks`. Has `id-token: write` for npm trusted publishing (provenance); no `NODE_AUTH_TOKEN` secret is used.
 
 Both workflows pin actions by commit SHA and read the Node version from `.nvmrc` (currently 24.x).
