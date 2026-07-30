@@ -27,5 +27,8 @@ coverage/
 .idea/
 .DS_Store
 
+# personal VSCode settings (copy of .vscode/recommended-settings.json)
+.vscode/settings.json
+
 # local-only Claude Code overrides (settings.json itself IS tracked)
 .claude/settings.local.json

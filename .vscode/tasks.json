@@ -1,0 +1,85 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "pnpm run build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$tsc"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "typecheck",
+      "type": "shell",
+      "command": "pnpm run typecheck",
+      "problemMatcher": ["$tsc"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "lint",
+      "type": "shell",
+      "command": "pnpm run lint",
+      "problemMatcher": ["$eslint-stylish"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "lint:check",
+      "type": "shell",
+      "command": "pnpm run lint:check",
+      "problemMatcher": ["$eslint-stylish"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "pnpm test",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "test:watch",
+      "type": "shell",
+      "command": "pnpm run test:watch",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "verify",
+      "dependsOrder": "sequence",
+      "dependsOn": ["typecheck", "lint:check", "test", "build"],
+      "problemMatcher": []
+    }
+  ]
+}
